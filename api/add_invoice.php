@@ -31,7 +31,7 @@ accept('payment','發票金額的欄位必填');
 // echo "新增完成";
 
 if(empty($_SESSION['err'])){
-    save('invoices',$_POST);
+    save('invoice_invoices',$_POST);
     // $pdo->exec($sql);
     header("location:../logindex.php?do=invoice_list");
 }else{

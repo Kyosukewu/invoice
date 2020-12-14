@@ -9,7 +9,7 @@ $nowPeriod=ceil(date("m") / 2);
 $nowMonth=date('m');
 $today=date('d');
 
-$inv=$pdo->query("select * from `reward_record` where date LIKE'$year%' && period='$period'")->fetchALL();
+$inv=$pdo->query("select * from `invoice_reward_record` where date LIKE'$year%' && period='$period'")->fetchALL();
 
 if(empty($inv)){
     header("location:logindex.php?do=reward_record&y=$year&p=$period&empty=1");

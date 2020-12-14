@@ -17,7 +17,7 @@ $row['number']=$_POST['number'];
 $row['date']=$_POST['date'];
 $row['payment']=$_POST['payment'];
 
-save('invoices',$row);
+save('invoice_invoices',$row);
 
 $pdo->exec($sql);
 

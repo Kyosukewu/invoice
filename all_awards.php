@@ -6,10 +6,10 @@ $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
 $period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
 
-$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user=$pdo->query("select * from `invoice_login` where acc='{$_SESSION['login']}'")->fetch();
 $user_id=$user['id'];
 
-$awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
+$awards = $pdo->query("select * from invoice_award_numbers where year='$year' && period='$period'")->fetchALL();
 $special = "";
 $grand = "";
 $first = [];
@@ -207,14 +207,14 @@ $period_str = [
             <?php
             //撈出該期發票
             if($_SESSION['login'] == "admin"){
-                $sql = "select * from `invoices` where left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
+                $sql = "select * from `invoice_invoices` where left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
             }else{
-                $sql = "select * from `invoices` where user_id='$user_id' && left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
+                $sql = "select * from `invoice_invoices` where user_id='$user_id' && left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
             }
             $invoices = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             
             //撈出該期獎號
-            $sql = "select * from `award_numbers` where year='{$_GET['y']}' && period='{$_GET['p']}'Order by type";
+            $sql = "select * from `invoice_award_numbers` where year='{$_GET['y']}' && period='{$_GET['p']}'Order by type";
             $award_numbers = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             //PDO::FETCH_ASSOC 以欄位的方式取得資料
             //PDO::FETCH_NUM 取索引
@@ -248,7 +248,7 @@ $period_str = [
                                 $count_award = $count_award + 10000000;
                                 $aw = "特別獎";
                                 $bonus = $abonus[$aw];
-                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                $reinv=$pdo->query("select * from invoice_invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
                                 array_push($reinv,$aw,$bonus);
                                 $reinvs[]=$reinv;
                                 // print_r($reinvs);
@@ -263,7 +263,7 @@ $period_str = [
                                 $count_award = $count_award + 2000000;
                                 $aw = "特獎";
                                 $bonus = $abonus[$aw];
-                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                $reinv=$pdo->query("select * from invoice_invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
                                 array_push($reinv,$aw,$bonus);
                                 $reinvs[]=$reinv;
                                 // print_r($reinvs);
@@ -288,7 +288,7 @@ $period_str = [
                                 $all_res = 1;
                                 $aw = "{$awardStr[$res]}獎";
                                 $bonus = $abonus[$aw];
-                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                $reinv=$pdo->query("select * from invoice_invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
                                 array_push($reinv,$aw,$bonus);
                                 $reinvs[]=$reinv;
                                 // print_r($reinvs);
@@ -324,7 +324,7 @@ $period_str = [
                                 $count_award = $count_award + 200;
                                 $aw = "陸獎";
                                 $bonus = $abonus[$aw];
-                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                $reinv=$pdo->query("select * from invoice_invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
                                 array_push($reinv,$aw,$bonus);
                                 $reinvs[]=$reinv;
                                 // print_r($reinvs);
@@ -342,9 +342,9 @@ $period_str = [
             
             if($all_res >= 0){
             foreach($reinvs as $reinv){
-                $check=$pdo->query("select * from `reward_record` where inid='{$reinv['id']}'")->fetch();
+                $check=$pdo->query("select * from `invoice_reward_record` where inid='{$reinv['id']}'")->fetch();
                 if(empty($check)){
-                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$reinv['id']}','{$reinv['user_id']}','{$reinv['code']}','{$reinv['number']}','{$reinv['period']}','{$reinv['payment']}','{$reinv['date']}','{$reinv['0']}','{$reinv['1']}')";
+                    $sql="insert into `invoice_reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$reinv['id']}','{$reinv['user_id']}','{$reinv['code']}','{$reinv['number']}','{$reinv['period']}','{$reinv['payment']}','{$reinv['date']}','{$reinv['0']}','{$reinv['1']}')";
                     $pdo->exec($sql);
                 }
             }

@@ -2,7 +2,7 @@
 include_once "base.php";
 //編輯會員資料
 $user_id=$_GET['id']; //login 資料表的id .member 資料表login_id
-$user_sql="select * from `login`,`member` where `login`.`id` = `member`.`login_id` AND `login`.`id`='$user_id'";
+$user_sql="select * from `invoice_login`,`invoice_member` where `login`.`id` = `member`.`login_id` AND `login`.`id`='$user_id'";
 $user=$pdo->query($user_sql)->fetch();
 ?>
 <div class="d-flex justify-content-center">

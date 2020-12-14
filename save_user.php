@@ -12,7 +12,7 @@ $email=$_POST['email'];
 $education=$_POST['education'];
 $role=$_POST['role'];
 
-// $login=$pdo->query("select * from `login` where `id`='$id'")->fetch();
+// $login=$pdo->query("select * from `invoice_login` where `id`='$id'")->fetch();
 
 $update_login_sql="update `login` set `acc`='$acc',`pw`='$pw',`email`='$email' where `id`='$id'";
 $pdo->exec($update_login_sql);

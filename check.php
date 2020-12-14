@@ -7,7 +7,7 @@ $acc=$_POST['acc'];
 $pw=$_POST['pw'];
 $_SESSION['login']=$acc;
 
-$sql="select * from `login` where `acc`='$acc' && `pw`='$pw'";
+$sql="select * from `invoice_login` where `acc`='$acc' && `pw`='$pw'";
 
 $check=$pdo->query($sql)->fetch();
 

@@ -22,7 +22,7 @@ for($i=0;$i<2000;$i++){
     'date'=>$date,
     'period'=>$period
 ];
-    $sql="insert into invoices (`".implode("`,`",array_keys($fake))."`) values('".implode("','",$fake)."')";
+    $sql="insert into invoice_invoices (`".implode("`,`",array_keys($fake))."`) values('".implode("','",$fake)."')";
     $pdo->exec($sql);
 }
 

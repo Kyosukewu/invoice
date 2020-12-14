@@ -4,14 +4,14 @@ include_once("base.php");
 
 $year =  $_GET['y'];
 $period = $_GET['p'];
-$user = $pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user = $pdo->query("select * from `invoice_login` where acc='{$_SESSION['login']}'")->fetch();
 $user_id = $user['id'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 if ($_SESSION['login'] == "admin") {
-    $rowCount = $pdo->query("select COUNT(period) from `invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+    $rowCount = $pdo->query("select COUNT(period) from `invoice_invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
 } else {
-    $rowCount = $pdo->query("select COUNT(period) from `invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+    $rowCount = $pdo->query("select COUNT(period) from `invoice_invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
 }
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
@@ -19,7 +19,7 @@ if (!empty($_GET['pageNow'])) {
     $pageNow = $_GET['pageNow'];
 }
 $pageStart = ($pageNow - 1) * $pageSize; //目前頁面
-$sql = "select * from `invoices` where period='$period' Order by date desc limit $pageStart,$pageSize";
+$sql = "select * from `invoice_invoices` where period='$period' Order by date desc limit $pageStart,$pageSize";
 $rows = $pdo->query($sql)->fetchall();
 
 ?>
@@ -151,7 +151,7 @@ $rows = $pdo->query($sql)->fetchall();
 </div>
 
 <?php
-$inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
+$inv = $pdo->query("select * from invoice_invoices where id='{$_GET['id']}'")->fetch();
 ?>
 <div class="overlay">
     <div class="title bg-danger">

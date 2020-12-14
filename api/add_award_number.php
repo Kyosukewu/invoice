@@ -27,7 +27,7 @@ $period=$_POST['period'];
 //特別獎新增 type=1
 
 $sql="insert into 
-award_numbers 
+invoice_award_numbers 
 (`year`,`period`,`number`,`type`) 
 values
 ('$year','$period','{$_POST['special_prize']}','1')";
@@ -35,7 +35,7 @@ $pdo->exec($sql);
 
 //特獎新增 type=2
 $sql="insert into 
-award_numbers 
+invoice_award_numbers 
 (`year`,`period`,`number`,`type`) 
 values
 ('$year','$period','{$_POST['grand_prize']}','2')";//陣列一定要{}  非陣列都可
@@ -45,7 +45,7 @@ $pdo->exec($sql);
 foreach($_POST['first_prize'] as $first){
     if(!empty($first)){
     $sql="insert into 
-    award_numbers 
+    invoice_award_numbers 
     (`year`,`period`,`number`,`type`) 
     values
     ('$year','$period','$first','3')";//陣列一定要{}  非陣列都可
@@ -57,7 +57,7 @@ foreach($_POST['first_prize'] as $first){
 foreach($_POST['add_prize'] as $six){
     if(!empty($six)){
     $sql="insert into 
-    award_numbers 
+    invoice_award_numbers 
     (`year`,`period`,`number`,`type`) 
     values
     ('$year','$period','$six','4')";//陣列一定要{}  非陣列都可

@@ -1,19 +1,19 @@
 <?php
 include_once("base.php");
 //期別查詢
-$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
+$get_new = $pdo->query("select * from `invoice_award_numbers` order by year desc,period desc limit 1")->fetch();
 $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
 $period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
-$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user=$pdo->query("select * from `invoice_login` where acc='{$_SESSION['login']}'")->fetch();
 $user_id=$user['id'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 if($_SESSION['login'] == "admin"){
-    $rowCount = $pdo->query("select COUNT(period) from `invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+    $rowCount = $pdo->query("select COUNT(period) from `invoice_invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
 }else{
-    $rowCount = $pdo->query("select COUNT(period) from `invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+    $rowCount = $pdo->query("select COUNT(period) from `invoice_invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
 }
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
@@ -21,7 +21,7 @@ if (!empty($_GET['pageNow'])) {
     $pageNow = $_GET['pageNow'];
 }
 $pageStart = ($pageNow - 1) * $pageSize; //目前頁面
-$sql = "select * from `invoices` where period='$period' Order by date desc limit $pageStart,$pageSize";
+$sql = "select * from `invoice_invoices` where period='$period' Order by date desc limit $pageStart,$pageSize";
 $rows = $pdo->query($sql)->fetchall();
 
 ?>
@@ -153,7 +153,7 @@ $rows = $pdo->query($sql)->fetchall();
 </div>
 
 <?php
-$inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
+$inv = $pdo->query("select * from invoice_invoices where id='{$_GET['id']}'")->fetch();
 ?>
 <div class="overlay">
     <div class="title bg-success">

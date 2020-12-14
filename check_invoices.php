@@ -9,7 +9,7 @@ $nowPeriod=ceil(date("m") / 2);
 $nowMonth=date('m');
 $today=date('d');
 
-$inv=$pdo->query("select * from `invoices` where date LIKE'$year%' && period='$period'")->fetchALL();
+$inv=$pdo->query("select * from `invoice_invoices` where date LIKE'$year%' && period='$period'")->fetchALL();
 
 if(empty($inv)){
     if($year<$nowYear){

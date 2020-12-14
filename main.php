@@ -1,5 +1,5 @@
 <?php
-$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user=$pdo->query("select * from `invoice_login` where acc='{$_SESSION['login']}'")->fetch();
 $user_id=$user['id'];
 ?>
 

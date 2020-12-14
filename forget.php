@@ -28,7 +28,7 @@ include_once("base.php")
             <?php
             include_once "base.php";
             if (isset($_SESSION['login'])) {
-                $sql_user = "select `member`.`role`,`login`.`acc` from member,login where `member`.`login_id`=`login`.`id` &&  acc='{$_SESSION['login']}'";
+                $sql_user = "select `member`.`role`,`login`.`acc` from invoice_member,invoice_login where `member`.`login_id`=`login`.`id` &&  acc='{$_SESSION['login']}'";
                 $user = $pdo->query($sql_user)->fetch(PDO::FETCH_ASSOC);
             }
             ?>
@@ -50,7 +50,7 @@ include_once("base.php")
     </div>
     <?php
     if (isset($_POST['email'])) {
-        $sql = "select * from login where email='{$_POST['email']}'";
+        $sql = "select * from invoice_login where email='{$_POST['email']}'";
         $chk = $pdo->query($sql)->fetch();
         // echo "<pre>";
         // print_r($chk);

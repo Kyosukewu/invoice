@@ -1,7 +1,7 @@
 <?php
 
-$dsn = "mysql:host=localhost;dbname=invoice;charset=utf8";
-$pdo = new PDO($dsn, 'root', '');
+$dsn = "mysql:host=localhost;dbname=s1090421;charset=utf8";
+$pdo = new PDO($dsn, 's1090421', 's1090421');
 
 date_default_timezone_set("Asia/Taipei");
 session_start();
