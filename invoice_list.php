@@ -1,7 +1,7 @@
 <?php
 include_once("base.php");
 //期別查詢
-$get_new = $pdo->query("select * from `invoices` order by date desc,period desc limit 1")->fetch(PDO::FETCH_ASSOC);
+$get_new = $pdo->query("select * from `invoice_invoices` order by date desc,period desc limit 1")->fetch(PDO::FETCH_ASSOC);
 
 $nyear = mb_substr($get_new['date'], 0, 4);
 $nperiod = $get_new['period'];

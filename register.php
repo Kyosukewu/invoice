@@ -28,7 +28,7 @@ include_once("base.php")
             <?php
             include_once "base.php";
             if (isset($_SESSION['login'])) {
-                $sql_user = "select `member`.`role`,`login`.`acc` from invoice_member,login where `member`.`login_id`=`login`.`id` &&  acc='{$_SESSION['login']}'";
+                $sql_user = "select `member`.`role`,`login`.`acc` from invoice_member,invoice_login where `member`.`login_id`=`login`.`id` &&  acc='{$_SESSION['login']}'";
                 $user = $pdo->query($sql_user)->fetch(PDO::FETCH_ASSOC);
             }
             ?>

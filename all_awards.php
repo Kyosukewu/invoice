@@ -1,6 +1,6 @@
 <?php
 include_once("base.php");
-$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
+$get_new = $pdo->query("select * from `invoice_award_numbers` order by year desc,period desc limit 1")->fetch();
 $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;

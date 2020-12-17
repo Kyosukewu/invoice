@@ -11,7 +11,7 @@ include_once("../base.php");
 // where 
 // `id`='{$_POST['id']}'";
 
-$row=find('invoices',$_POST['id']);
+$row=find('invoice_invoices',$_POST['id']);
 $row['code']=$_POST['code'];
 $row['number']=$_POST['number'];
 $row['date']=$_POST['date'];

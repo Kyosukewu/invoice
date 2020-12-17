@@ -121,7 +121,7 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#"">
+            <a class="page-link" href="#">
                 <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
             </a>
         </li>

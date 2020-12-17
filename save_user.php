@@ -14,10 +14,10 @@ $role=$_POST['role'];
 
 // $login=$pdo->query("select * from `invoice_login` where `id`='$id'")->fetch();
 
-$update_login_sql="update `login` set `acc`='$acc',`pw`='$pw',`email`='$email' where `id`='$id'";
+$update_login_sql="update `invoice_login` set `acc`='$acc',`pw`='$pw',`email`='$email' where `id`='$id'";
 $pdo->exec($update_login_sql);
 
-$update_member_sql="update `member` set `name`='$name',`birthday`='$birthday',`role`='$role',`education`='$education',`addr`='$addr' where `login_id`='$id'";
+$update_member_sql="update `invoice_member` set `name`='$name',`birthday`='$birthday',`role`='$role',`education`='$education',`addr`='$addr' where `login_id`='$id'";
 $pdo->exec($update_member_sql);
 
 

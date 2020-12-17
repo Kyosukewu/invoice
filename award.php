@@ -174,7 +174,7 @@ $inv = $pdo->query("select * from invoice_invoices where id='{$_GET['id']}'")->f
             <?php
             // include_once("base.php");
             $inv_id = $_GET['id'];
-            $invoice = $pdo->query("select * from invoices where id='$inv_id'")->fetch();
+            $invoice = $pdo->query("select * from invoice_invoices where id='$inv_id'")->fetch();
             // echo "<pre>";
             // print_r($invoice);
             // echo "</pre>";
@@ -188,7 +188,7 @@ $inv = $pdo->query("select * from invoice_invoices where id='{$_GET['id']}'")->f
             //月份期可推算期數，有期數及年份即可找到開獎號碼
             $year = explode('-', $date)[0];
             $period = ceil(explode('-', $date)[1] / 2);
-            $awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
+            $awards = $pdo->query("select * from invoice_award_numbers where year='$year' && period='$period'")->fetchALL();
 
             $all_res = -1;
             $aw="";
@@ -256,10 +256,10 @@ $inv = $pdo->query("select * from invoice_invoices where id='{$_GET['id']}'")->f
 
             // insert into invoices (`date`,`period`,`code`,`number`,`payment`) values('2020-12-02','1','SG','0267817448','40')
 
-            $check=$pdo->query("select * from `reward_record` where id='$inv_id'")->fetch();
+            $check=$pdo->query("select * from `invoice_reward_record` where id='$inv_id'")->fetch();
             //資料寫入
             if($all_res>=0 && empty($check)){
-                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$invoice['id']}','{$invoice['user_id']}','{$invoice['code']}','{$invoice['number']}','{$invoice['period']}','{$invoice['payment']}','{$invoice['date']}','$aw','$bonus')";
+                    $sql="insert into `invoice_reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$invoice['id']}','{$invoice['user_id']}','{$invoice['code']}','{$invoice['number']}','{$invoice['period']}','{$invoice['payment']}','{$invoice['date']}','$aw','$bonus')";
                     $pdo->exec($sql);
                 }
 
