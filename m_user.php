@@ -1,7 +1,7 @@
 <?php
 
 include_once "base.php";
-$userData = "select `login`.`id`,`acc`,`name`,`role`,`birthday`,`email`,`addr`,`create_time` from `invoice_login`,`invoice_member` where `login`.`id`=`member`.`login_id` ";
+$userData = "select `invoice_login`.`id`,`acc`,`name`,`role`,`birthday`,`email`,`addr`,`create_time` from `invoice_login`,`invoice_member` where `invoice_login`.`id`=`invoice_member`.`login_id` ";
 $users = $pdo->query($userData)->fetchALL();
 ?>
 

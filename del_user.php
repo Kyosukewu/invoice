@@ -9,7 +9,7 @@ include_once "base.php";
 
 <?php
 $user_id = $_GET['id'];
-$user_sql = "select * from `invoice_login`,`invoice_member` where `login`.`id` = `member`.`login_id` AND `login`.`id`='$user_id'";
+$user_sql = "select * from `invoice_login`,`invoice_member` where `invoice_login`.`id` = `invoice_member`.`login_id` AND `invoice_login`.`id`='$user_id'";
 $userdata = $pdo->query($user_sql)->fetch();
 ?>
 <div class="overlayl">
